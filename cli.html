@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLI — kroma</title>
+<meta name="description" content="The kroma command and the flags for one matching experiment.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html">kroma</a>
+  <label class="nav-button" for="nav-toggle">Menu</label>
+</header>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+<div class="layout">
+<nav class="nav">
+<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html" aria-current="page">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+</nav>
+<main id="content">
+<p class="kicker">kroma.cli</p>
+<h1>CLI</h1>
+<p class="lede">kroma run starts one experiment. With no arguments, kroma prints help and exits.</p>
+
+<nav class="toc"><strong>On this page</strong><ol><li><a href="#command">Command</a></li><li><a href="#flags">Flags</a></li><li><a href="#from-python">From Python</a></li></ol></nav>
+<h2 id="command">Command</h2>
+<pre><code>kroma run \
+  --method_config kroma_scibert_envo_sweet \
+  --llm meta-llama/Llama-3.3-70B-Instruct-Turbo-Free \
+  --baseline</code></pre>
+<p><code>--method_config</code> is the JSONL file name under <code>experiments/configs/method/&lt;llm&gt;/</code>. <code>--llm</code> is that directory name. Both are required.</p>
+<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/cli.py">cli.py</a>.</p>
+<h2 id="flags">Flags</h2>
+<table>
+<tr><th>Flag</th><th>Meaning</th></tr>
+<tr><td><code>--method_config</code></td><td>Required. Config name, without <code>.jsonl</code>.</td></tr>
+<tr><td><code>--llm</code></td><td>Required. Model directory under <code>experiments/configs/method/</code>.</td></tr>
+<tr><td><code>--size</code></td><td>Fraction of the alignment to score. Default <code>full</code>.</td></tr>
+<tr><td><code>--baseline</code></td><td>Single-model baseline.</td></tr>
+<tr><td><code>--debate</code></td><td>Several agents, several rounds. Omit it for one model.</td></tr>
+<tr><td><code>--reasoning</code></td><td>Ask the model to reason before yes or no.</td></tr>
+<tr><td><code>--active_learning</code></td><td>Hold low-confidence pairs for review.</td></tr>
+<tr><td><code>--compare_models</code></td><td>Compare model settings from the config.</td></tr>
+<tr><td><code>--bisim</code></td><td>Use the bisimulation context path.</td></tr>
+</table>
+<h2 id="from-python">From Python</h2>
+<pre><code>RunCommand(args).execute() -&gt; None</code></pre>
+<p><code>RunCommand</code> imports <code>MatchingRun</code> and runs it. If a model package is missing, it exits with the install line <code>uv pip install '.[models]'</code>.</p>
+
+</main>
+</div>
+<footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+</body>
+</html>

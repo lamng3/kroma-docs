@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loaders — kroma</title>
+<meta name="description" content="CsvAlignmentLoader and OwlOntologyLoader, the two OntologyLoader implementations.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html">kroma</a>
+  <label class="nav-button" for="nav-toggle">Menu</label>
+</header>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+<div class="layout">
+<nav class="nav">
+<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html" aria-current="page">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+</nav>
+<main id="content">
+<p class="kicker">kroma.tasks.loader</p>
+<h1>Loaders</h1>
+<p class="lede">A loader returns a source graph, a target graph, and a list of alignments.</p>
+
+<nav class="toc"><strong>On this page</strong><ol><li><a href="#base">OntologyLoader</a></li><li><a href="#csv">CSV alignments</a></li><li><a href="#owl">OWL</a></li></ol></nav>
+<h2 id="base">OntologyLoader</h2>
+<pre><code>load() -&gt; (source_graph, target_graph, alignments)</code></pre>
+<p>An alignment is <code>(source, target, label)</code>. Each endpoint is a <code>(label, uri)</code> pair.</p>
+<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/tasks/loader.py">loader.py</a>.</p>
+<h2 id="csv">CSV alignments</h2>
+<pre><code>CsvAlignmentLoader(csv_paths, dataset="ncit-doid").load()</code></pre>
+<p>For <code>ncit-doid</code>, rows use <code>src_code</code>, <code>src_ety</code>, <code>tgt_code</code>, <code>tgt_ety</code>, <code>tgt_cands</code>, and <code>score</code>. Other datasets use <code>source</code>, <code>source_uri</code>, <code>target</code>, <code>target_uri</code>, and <code>relation</code>.</p>
+<h2 id="owl">OWL</h2>
+<pre><code>OwlOntologyLoader(owl_path).load()</code></pre>
+<p>This reads an OWL or RDF/XML file and builds the class hierarchy from <code>rdfs:subClassOf</code>, with synonyms from the annotation properties on each class.</p>
+
+</main>
+</div>
+<footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+</body>
+</html>

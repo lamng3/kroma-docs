@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matching run — kroma</title>
+<meta name="description" content="MatchingRun prepares a task, scores each pair, and writes precision, recall, and F1.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html">kroma</a>
+  <label class="nav-button" for="nav-toggle">Menu</label>
+</header>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+<div class="layout">
+<nav class="nav">
+<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html" aria-current="page">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+</nav>
+<main id="content">
+<p class="kicker">kroma.pipeline</p>
+<h1>Matching run</h1>
+<p class="lede">MatchingRun is the template for one evaluation: prepare, score, then finish.</p>
+
+<nav class="toc"><strong>On this page</strong><ol><li><a href="#call">Call</a></li><li><a href="#methods">Methods</a></li><li><a href="#output">Output</a></li></ol></nav>
+<h2 id="call">Call</h2>
+<pre><code>MatchingRun(args, listener=None)
+MatchingRun.execute() -&gt; dict</code></pre>
+<p><code>execute</code> calls <code>prepare</code>, <code>score_pairs</code>, and <code>finish</code>. <code>listener</code> defaults to <code>MetricsListener</code>, which counts tokens and refinement time.</p>
+<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/pipeline.py">pipeline.py</a>.</p>
+<h2 id="methods">Methods</h2>
+<table>
+<tr><th>Method</th><th>What it does</th></tr>
+<tr><td><code>prepare()</code></td><td>Load the method JSONL and dataset JSON, open output files, build the task, and fill the vector stores.</td></tr>
+<tr><td><code>score_pairs()</code></td><td>Judge each alignment. Skip a pair already stored. Refine on a fixed interval.</td></tr>
+<tr><td><code>finish()</code></td><td>Run the final offline refinement and write the metrics JSON.</td></tr>
+</table>
+<h2 id="output">Output</h2>
+<p>Accepted alignments go under <code>results/</code>. Pairs that need an expert go under <code>reviews/</code>. The metrics file sits next to the prediction file and ends in <code>.metrics.json</code>. It includes precision, recall, F1, token counts, and refinement timings.</p>
+<p>The run log is <code>logs/kroma.log</code>.</p>
+
+</main>
+</div>
+<footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+</body>
+</html>

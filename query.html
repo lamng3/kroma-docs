@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Query — kroma</title>
+<meta name="description" content="query() merges parents, children, synonyms, and labels from dictionary, SPARQL, ontology, and ConceptNet sources.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html">kroma</a>
+  <label class="nav-button" for="nav-toggle">Menu</label>
+</header>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+<div class="layout">
+<nav class="nav">
+<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html" aria-current="page">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+</nav>
+<main id="content">
+<p class="kicker">kroma.tasks.query_engine</p>
+<h1>Query</h1>
+<p class="lede">query asks each named strategy for local context and concatenates the results.</p>
+
+<nav class="toc"><strong>On this page</strong><ol><li><a href="#call">Call</a></li><li><a href="#strategies">Strategies</a></li></ol></nav>
+<h2 id="call">Call</h2>
+<pre><code>query(concept_code, pcmap, dictionary, options)
+  -&gt; parents, children, synonyms, labels
+
+register_query_strategy(name, strategy) -&gt; None</code></pre>
+<p>Unknown option names are skipped. A strategy that raises is skipped, and the other options still return.</p>
+<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/tasks/query_engine.py">query_engine.py</a>.</p>
+<h2 id="strategies">Strategies</h2>
+<table>
+<tr><th>Strategy</th><th>Option names</th></tr>
+<tr><td><code>DictionaryStrategy</code></td><td><code>envo</code>, <code>sweet</code>, <code>mouse</code>, <code>human</code>, <code>yago</code>, <code>wikidata</code>, <code>mi</code>, <code>mi2</code>, <code>matonto</code>, <code>emmo</code>, <code>omim</code>, <code>ordo</code></td></tr>
+<tr><td><code>SparqlStrategy</code></td><td><code>ncit</code>, <code>doid</code>, <code>dbpedia</code></td></tr>
+<tr><td><code>OntologyStrategy</code></td><td><code>ontology</code></td></tr>
+<tr><td><code>ConceptNetStrategy</code></td><td><code>conceptnet</code></td></tr>
+</table>
+<p>A custom source is any object with <code>fetch(code, pcmap, dictionary, topk)</code> registered under a name.</p>
+
+</main>
+</div>
+<footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+</body>
+</html>

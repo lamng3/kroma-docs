@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview — kroma</title>
+<meta name="description" content="The KROMA Python API: the command line, the matching run, retrieval, models, and refinement.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html">kroma</a>
+  <label class="nav-button" for="nav-toggle">Menu</label>
+</header>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+<div class="layout">
+<nav class="nav">
+<a class="brand-desk" href="index.html">kroma</a><a href="index.html" aria-current="page">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+</nav>
+<main id="content">
+<p class="kicker">API</p>
+<h1>Overview</h1>
+<p class="lede">KROMA matches concepts across two ontologies. These pages are the Python API: what you call, and what it returns.</p>
+
+<nav class="toc"><strong>On this page</strong><ol><li><a href="#the-pieces">The pieces</a></li><li><a href="#one-run">One run</a></li><li><a href="#install">Install</a></li></ol></nav>
+<p>A run loads an alignment, retrieves local context for each concept, asks a language model whether the pair matches, and refines the joined graph. The command line is the usual entry. The same steps are available as functions.</p>
+<h2 id="the-pieces">The pieces</h2>
+<div class="cards">
+<a class="card" href="cli.html"><strong>CLI</strong><span><code>kroma run</code> and the flags that select a config, a model, and a mode.</span></a>
+<a class="card" href="pipeline.html"><strong>Matching run</strong><span><code>MatchingRun</code> prepares the task, scores pairs, and writes metrics.</span></a>
+<a class="card" href="loaders.html"><strong>Loaders</strong><span>CSV alignments and an OWL class hierarchy.</span></a>
+<a class="card" href="query.html"><strong>Query</strong><span>Parents, children, synonyms, and labels from a named source.</span></a>
+<a class="card" href="models.html"><strong>Models</strong><span>OpenAI and Together chat models, and embedding backends.</span></a>
+<a class="card" href="retrieval.html"><strong>Retrieval</strong><span>Cosine search over concatenated text and Node2Vec vectors.</span></a>
+<a class="card" href="refinement.html"><strong>Refinement</strong><span>Online updates while scoring, and a final offline collapse.</span></a>
+<a class="card" href="metrics.html"><strong>Metrics</strong><span>Precision, recall, and F1 for a binary alignment.</span></a>
+</div>
+<h2 id="one-run">One run</h2>
+<ol>
+<li><code>kroma run</code> parses flags and calls <code>MatchingRun.execute</code>.</li>
+<li><code>prepare</code> reads the method JSONL and the dataset JSON, then builds vector stores.</li>
+<li><code>score_pairs</code> retrieves context, calls <code>infer</code>, and records the prediction.</li>
+<li><code>finish</code> runs <code>offline_refine</code> and writes a metrics JSON file.</li>
+</ol>
+<h2 id="install">Install</h2>
+<pre><code>git clone https://github.com/lamng3/kroma.git
+cd kroma
+./setup.sh
+source .venv/bin/activate
+uv pip install ".[models]"</code></pre>
+<p>Copy <code>.env.example</code> to <code>.env</code> and set <code>TOGETHERAI_API_KEY</code> or <code>OPENAI_API_KEY</code>. The paper is <a href="https://arxiv.org/abs/2507.14032">ISWC 2025</a>.</p>
+
+</main>
+</div>
+<footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+</body>
+</html>

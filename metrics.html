@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metrics — kroma</title>
+<meta name="description" content="calculate_metrics returns precision, recall, and F1.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html">kroma</a>
+  <label class="nav-button" for="nav-toggle">Menu</label>
+</header>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+<div class="layout">
+<nav class="nav">
+<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html" aria-current="page">Metrics</a>
+</nav>
+<main id="content">
+<p class="kicker">kroma.metrics.scoring</p>
+<h1>Metrics</h1>
+<p class="lede">Metrics are binary. A positive prediction that matches the label is a true positive.</p>
+
+<nav class="toc"><strong>On this page</strong><ol><li><a href="#call">Call</a></li><li><a href="#empty">Empty input</a></li></ol></nav>
+<h2 id="call">Call</h2>
+<pre><code>calculate_metrics(y_true, y_pred, positive_label=1)
+  -&gt; (precision, recall, f1)</code></pre>
+<p><code>y_true</code> and <code>y_pred</code> are sequences of labels, zipped in order. <code>positive_label</code> defaults to <code>1</code>.</p>
+<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/metrics/scoring.py">scoring.py</a>.</p>
+<h2 id="empty">Empty input</h2>
+<p>Precision is 0 when there are no positive predictions. Recall is 0 when there are no positive labels. F1 is 0 when precision and recall are both 0. The function does not raise on an empty pair of lists.</p>
+
+</main>
+</div>
+<footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+</body>
+</html>

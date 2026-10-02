@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Models — kroma</title>
+<meta name="description" content="Chat and embedding factories, and the single-model and debate inference strategies.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <a class="brand" href="index.html">kroma</a>
+  <label class="nav-button" for="nav-toggle">Menu</label>
+</header>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+<div class="layout">
+<nav class="nav">
+<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html" aria-current="page">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+</nav>
+<main id="content">
+<p class="kicker">kroma.inference</p>
+<h1>Models</h1>
+<p class="lede">Chat providers adapt OpenAI and Together. Embedding providers adapt Hugging Face and sentence-transformers.</p>
+
+<nav class="toc"><strong>On this page</strong><ol><li><a href="#factories">Factories</a></li><li><a href="#inference">Inference</a></li></ol></nav>
+<h2 id="factories">Factories</h2>
+<pre><code>create_inference_model(backend, model_name) -&gt; BaseModel
+create_embedding_model(backend, model_name) -&gt; BaseEmbeddingModel
+register_chat_backend(name, provider_cls) -&gt; None
+register_embedding_backend(name, provider_cls) -&gt; None</code></pre>
+<p>Chat backends are <code>openai</code> and <code>togetherai</code>. The API key is <code>OPENAI_API_KEY</code> or <code>TOGETHERAI_API_KEY</code>. Embedding backends are <code>huggingface</code> and <code>sentence-transformers</code>.</p>
+<p><code>BaseModel.generate</code> retries transient connection, timeout, and rate-limit errors.</p>
+<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/inference/factory.py">factory.py</a>.</p>
+<h2 id="inference">Inference</h2>
+<pre><code>infer(debate, backend, model_name, source_term, target_term, ...)
+  -&gt; prediction, metrics, confidence, accept</code></pre>
+<table>
+<tr><th>Class</th><th>Role</th></tr>
+<tr><td><code>SingleModelInference</code></td><td>One agent, one round.</td></tr>
+<tr><td><code>DebateInference</code></td><td>One agent per config, for <code>n_rounds</code> rounds.</td></tr>
+</table>
+<p><code>expand_term</code> calls <code>query</code> and returns the concept code plus parents, children, synonyms, and labels.</p>
+<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/agents/inference.py">inference.py</a>.</p>
+
+</main>
+</div>
+<footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+</body>
+</html>
