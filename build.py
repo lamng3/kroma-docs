@@ -374,6 +374,9 @@ VectorStore.query(query_emb, top_k=5) -&gt; list[(id, score)]</code></pre>
 <p>Precision is 0 when there are no positive predictions. Recall is 0 when there are no positive labels. F1 is 0 when precision and recall are both 0. The function does not raise on an empty pair of lists.</p>
 """,
     )
+    import normalize
+
+    normalize.run(ROOT)
 
 
 if __name__ == "__main__":

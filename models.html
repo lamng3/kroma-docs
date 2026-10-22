@@ -26,7 +26,7 @@
 <input id="nav-toggle" class="nav-toggle" type="checkbox">
 <div class="layout">
 <nav class="nav">
-<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html" aria-current="page">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+<a class="brand-desk" href="index.html">kroma</a><input class="search" id="q" type="search" placeholder="Search the manual" autocomplete="off"><ul id="results" hidden></ul><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html" aria-current="page">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
 </nav>
 <main id="content">
 <p class="kicker">kroma.inference</p>
@@ -53,8 +53,10 @@ register_embedding_backend(name, provider_cls) -&gt; None</code></pre>
 <p><code>expand_term</code> calls <code>query</code> and returns the concept code plus parents, children, synonyms, and labels.</p>
 <p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/agents/inference.py">inference.py</a>.</p>
 
+<nav class="pager" aria-label="Pages"><a class="prev" href="query.html"><span>Previous</span>Query</a><a class="next" href="retrieval.html"><span>Next</span>Retrieval</a></nav>
 </main>
 </div>
 <footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+<script src="search.js"></script>
 </body>
 </html>

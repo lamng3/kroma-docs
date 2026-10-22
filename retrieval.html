@@ -26,7 +26,7 @@
 <input id="nav-toggle" class="nav-toggle" type="checkbox">
 <div class="layout">
 <nav class="nav">
-<a class="brand-desk" href="index.html">kroma</a><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html" aria-current="page">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
+<a class="brand-desk" href="index.html">kroma</a><input class="search" id="q" type="search" placeholder="Search the manual" autocomplete="off"><ul id="results" hidden></ul><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html" aria-current="page">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
 </nav>
 <main id="content">
 <p class="kicker">kroma.retrieval</p>
@@ -47,8 +47,10 @@ VectorStore.query(query_emb, top_k=5) -&gt; list[(id, score)]</code></pre>
 <p>The default combine method is concatenation of the text embedding and the Node2Vec embedding. <code>alpha</code> applies when the method is a weighted mix rather than concatenation.</p>
 <p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/algorithms/node2vec.py">node2vec.py</a>.</p>
 
+<nav class="pager" aria-label="Pages"><a class="prev" href="models.html"><span>Previous</span>Models</a><a class="next" href="refinement.html"><span>Next</span>Refinement</a></nav>
 </main>
 </div>
 <footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+<script src="search.js"></script>
 </body>
 </html>
