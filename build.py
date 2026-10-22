@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parent
 NAV = [
     ("index.html", "Overview"),
     ("cli.html", "CLI"),
+    ("playground.html", "Playground"),
     ("pipeline.html", "Matching run"),
     ("loaders.html", "Loaders"),
     ("query.html", "Query"),
@@ -37,7 +38,7 @@ HEADER = """<header class="site">
   <a class="logo" href="index.html"><span class="logo-mark">K</span><span>KROMA</span></a>
   <nav class="site">
     <a href="pipeline.html">Pipeline</a>
-    <a href="query.html">Query</a>
+    <a href="playground.html">Playground</a>
     <a href="cli.html">CLI</a>
     <label class="nav-button" for="nav-toggle">Menu</label>
     <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
@@ -60,8 +61,8 @@ HOME = """<section class="hero">
 <span class="prompt">$ </span>./setup.sh &amp;&amp; source .venv/bin/activate
 <span class="prompt">$ </span>kroma run --help</pre>
     <div class="actions">
-      <a class="btn solid" href="pipeline.html">Matching run</a>
-      <a class="btn" href="cli.html">CLI</a>
+      <a class="btn solid" href="playground.html">Playground</a>
+      <a class="btn" href="pipeline.html">Matching run</a>
       <a class="btn" href="https://arxiv.org/abs/2507.14032">Paper</a>
     </div>
   </div>
@@ -124,7 +125,7 @@ def page(filename, title, description, kicker, lede, body):
   <a class="logo" href="index.html"><span class="logo-mark">K</span><span>KROMA</span></a>
   <nav class="site">
     <a href="pipeline.html">Pipeline</a>
-    <a href="query.html">Query</a>
+    <a href="playground.html">Playground</a>
     <a href="cli.html">CLI</a>
     <label class="nav-button" for="nav-toggle">Menu</label>
     <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
@@ -202,6 +203,25 @@ cd kroma
 source .venv/bin/activate
 uv pip install ".[models]"</code></pre>
 <p>Copy <code>.env.example</code> to <code>.env</code> and set <code>TOGETHERAI_API_KEY</code> or <code>OPENAI_API_KEY</code>. The paper is <a href="https://arxiv.org/abs/2507.14032">ISWC 2025</a>.</p>
+""",
+    )
+    page(
+        "playground.html",
+        "Playground",
+        "Describe two ontology concepts, see the exact prompt KROMA builds for them, and ask a model you run.",
+        "Try it",
+        "Describe two concepts, see the exact prompt KROMA builds for them, and ask a model you run whether they are the same.",
+        """
+<aside class="callout warning"><span class="label">What runs where</span><p>Everything runs in your browser. KROMA itself is Python and is not run here: the page builds the prompt with a port of KROMA's prompt builder (its templates are exported from the Python, so the text is identical), and reads the model's answer the way KROMA does. No model is hosted for this page, so <strong>Ask my model</strong> needs one you run yourself, for example Ollama on your computer.</p></aside>
+<div id="kplay" aria-label="KROMA playground">Loading the playground…</div>
+<script src="pg.js"></script>
+<script src="playground.js"></script>
+<h2 id="what-it-shows">What it shows</h2>
+<ul>
+<li>The <strong>prompt</strong> is the whole of what KROMA sends to decide one pair: both concepts' names, parents, children, and synonyms. Change a field and the prompt changes with it, so you can see how much a missing parent or a synonym can matter.</li>
+<li>The <strong>recorded answer</strong> for the example pairs is what the routed run of the <a href="https://lamng3.com/agentic-ontologist/">Agentic Ontologist</a> recorded, and which tier settled it.</li>
+<li>Retrieval, voting across several agents, and refinement are not run here. See <a href="retrieval.html">Retrieval</a> and <a href="refinement.html">Refinement</a>.</li>
+</ul>
 """,
     )
     page(
