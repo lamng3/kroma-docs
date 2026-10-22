@@ -84,6 +84,7 @@ def main():
             {
                 "source": source[0],
                 "target": target[0],
+                "context": {"source": list(source), "target": list(target)},
                 "system": system.strip(),
                 "prompt": user.strip(),
                 "tier": d["tier"],
