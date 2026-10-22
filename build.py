@@ -66,6 +66,7 @@ HOME = """<section class="hero">
   </div>
   <div class="demo-card" id="demo">
     <div class="head"><h3>What KROMA asks the model</h3><span class="tag">real <b>prompts</b>, recorded <b>answers</b></span></div>
+    <p class="try">Try it: Pick a pair to see the prompt KROMA sends for it, and how the recorded run answered.</p>
     <div class="tabs" id="tabs" role="tablist"></div>
     <pre class="prompt-box" id="prompt"></pre>
     <div class="verdict-row" id="verdict"></div>
