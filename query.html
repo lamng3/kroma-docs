@@ -15,7 +15,7 @@
 <a class="skip" href="#content">Skip to content</a>
 <header class="site">
   <a class="logo" href="index.html"><span class="logo-mark">K</span><span>KROMA</span></a>
-  <nav class="site">
+  <nav class="site" aria-label="Site">
     <a href="pipeline.html">Pipeline</a>
     <a href="query.html">Query</a>
     <a href="cli.html">CLI</a>
@@ -25,7 +25,7 @@
 </header>
 <input id="nav-toggle" class="nav-toggle" type="checkbox">
 <div class="layout">
-<nav class="nav">
+<nav class="nav" aria-label="Manual pages">
 <a class="brand-desk" href="index.html">KROMA Manual</a><input class="search" id="q" type="search" placeholder="Search the manual" autocomplete="off"><ul id="results" hidden></ul><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html" aria-current="page">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a><a href="leaderboard.html">Leaderboard</a>
 </nav>
 <main id="content">
@@ -33,7 +33,7 @@
 <h1>Query</h1>
 <p class="lede">query asks each named strategy for local context and concatenates the results.</p>
 
-<nav class="toc"><strong>On this page</strong><ol><li><a href="#call">Call</a></li><li><a href="#strategies">Strategies</a></li></ol></nav>
+<nav class="toc" aria-label="On this page"><strong>On this page</strong><ol><li><a href="#call">Call</a></li><li><a href="#strategies">Strategies</a></li></ol></nav>
 <h2 id="call">Call</h2>
 <pre><code>query(concept_code, pcmap, dictionary, options)
   -&gt; parents, children, synonyms, labels
@@ -42,13 +42,12 @@ register_query_strategy(name, strategy) -&gt; None</code></pre>
 <p>Unknown option names are skipped. A strategy that raises is skipped, and the other options still return.</p>
 <p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/tasks/query_engine.py">query_engine.py</a>.</p>
 <h2 id="strategies">Strategies</h2>
-<table>
-<tr><th>Strategy</th><th>Option names</th></tr>
+<table><thead><tr><th scope="col">Strategy</th><th scope="col">Option names</th></tr></thead><tbody>
 <tr><td><code>DictionaryStrategy</code></td><td><code>envo</code>, <code>sweet</code>, <code>mouse</code>, <code>human</code>, <code>yago</code>, <code>wikidata</code>, <code>mi</code>, <code>mi2</code>, <code>matonto</code>, <code>emmo</code>, <code>omim</code>, <code>ordo</code></td></tr>
 <tr><td><code>SparqlStrategy</code></td><td><code>ncit</code>, <code>doid</code>, <code>dbpedia</code></td></tr>
 <tr><td><code>OntologyStrategy</code></td><td><code>ontology</code></td></tr>
 <tr><td><code>ConceptNetStrategy</code></td><td><code>conceptnet</code></td></tr>
-</table>
+</tbody></table>
 <p>A custom source is any object with <code>fetch(code, pcmap, dictionary, topk)</code> registered under a name.</p>
 
 <nav class="pager" aria-label="Pages"><a class="prev" href="loaders.html"><span>Previous</span>Loaders</a><a class="next" href="models.html"><span>Next</span>Models</a></nav>

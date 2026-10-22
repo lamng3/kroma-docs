@@ -15,7 +15,7 @@
 <a class="skip" href="#content">Skip to content</a>
 <header class="site">
   <a class="logo" href="index.html"><span class="logo-mark">K</span><span>KROMA</span></a>
-  <nav class="site">
+  <nav class="site" aria-label="Site">
     <a href="pipeline.html">Pipeline</a>
     <a href="query.html">Query</a>
     <a href="cli.html">CLI</a>
@@ -25,7 +25,7 @@
 </header>
 <input id="nav-toggle" class="nav-toggle" type="checkbox">
 <div class="layout">
-<nav class="nav">
+<nav class="nav" aria-label="Manual pages">
 <a class="brand-desk" href="index.html">KROMA Manual</a><input class="search" id="q" type="search" placeholder="Search the manual" autocomplete="off"><ul id="results" hidden></ul><a href="index.html">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html" aria-current="page">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a><a href="leaderboard.html">Leaderboard</a>
 </nav>
 <main id="content">
@@ -33,19 +33,18 @@
 <h1>Matching run</h1>
 <p class="lede">MatchingRun is the template for one evaluation: prepare, score, then finish.</p>
 
-<nav class="toc"><strong>On this page</strong><ol><li><a href="#call">Call</a></li><li><a href="#methods">Methods</a></li><li><a href="#output">Output</a></li></ol></nav>
+<nav class="toc" aria-label="On this page"><strong>On this page</strong><ol><li><a href="#call">Call</a></li><li><a href="#methods">Methods</a></li><li><a href="#output">Output</a></li></ol></nav>
 <h2 id="call">Call</h2>
 <pre><code>MatchingRun(args, listener=None)
 MatchingRun.execute() -&gt; dict</code></pre>
 <p><code>execute</code> calls <code>prepare</code>, <code>score_pairs</code>, and <code>finish</code>. <code>listener</code> defaults to <code>MetricsListener</code>, which counts tokens and refinement time.</p>
 <p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/pipeline.py">pipeline.py</a>.</p>
 <h2 id="methods">Methods</h2>
-<table>
-<tr><th>Method</th><th>What it does</th></tr>
+<table><thead><tr><th scope="col">Method</th><th scope="col">What it does</th></tr></thead><tbody>
 <tr><td><code>prepare()</code></td><td>Load the method JSONL and dataset JSON, open output files, build the task, and fill the vector stores.</td></tr>
 <tr><td><code>score_pairs()</code></td><td>Judge each alignment. Skip a pair already stored. Refine on a fixed interval.</td></tr>
 <tr><td><code>finish()</code></td><td>Run the final offline refinement and write the metrics JSON.</td></tr>
-</table>
+</tbody></table>
 <h2 id="output">Output</h2>
 <p>Accepted alignments go under <code>results/</code>. Pairs that need an expert go under <code>reviews/</code>. The metrics file sits next to the prediction file and ends in <code>.metrics.json</code>. It includes precision, recall, F1, token counts, and refinement timings.</p>
 <p>The run log is <code>logs/kroma.log</code>.</p>
