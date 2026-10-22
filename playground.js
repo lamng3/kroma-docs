@@ -58,15 +58,18 @@ var KP = (function () {
     recordedBox.textContent = "The recorded run answered " + p.answer + " at confidence " + p.confidence.toFixed(2) + " (" + tier + "), and the reference " + (p.correct ? "agrees." : "disagrees.");
     update();
   }
+  function showReply(reply) {
+    var yes = KP.extractYesNo(reply), conf = KP.extractConfidence(reply), tagged = /<answer>/i.test(reply);
+    answer.replaceChildren(h("p", { class: "pg-line" }, "KROMA reads ", h("b", { text: yes ? "Yes" : "No" }), " at confidence ", h("b", { text: conf + " / 10" }), ". ", h("span", { class: "pg-tag " + (tagged ? "ok" : "bad"), text: tagged ? "answer tag found" : "no <answer> tag: KROMA would count this as No" })),
+      h("pre", { class: "pg-pre", text: reply.trim() }));
+  }
   async function ask() {
     var p = prompt(); answer.replaceChildren(h("p", { class: "pg-line", text: "Asking " + PG.llmConfig().model + "…" }));
-    try {
-      var reply = await PG.chat([{ role: "system", content: p.system }, { role: "user", content: p.user }]);
-      var yes = KP.extractYesNo(reply), conf = KP.extractConfidence(reply), tagged = /<answer>/i.test(reply);
-      answer.replaceChildren(h("p", { class: "pg-line" }, "The model answered ", h("b", { text: yes ? "Yes" : "No" }), " at confidence ", h("b", { text: conf + " / 10" }), ". ", h("span", { class: "pg-tag " + (tagged ? "ok" : "bad"), text: tagged ? "answer tag found" : "no <answer> tag: KROMA would count this as No" })),
-        h("pre", { class: "pg-pre", text: reply.trim() }));
-    } catch (e) { answer.replaceChildren(h("div", { class: "pg-error", role: "alert", text: String(e.message || e) + (/Failed to fetch|NetworkError/.test(String(e)) ? "\nThe browser could not reach the endpoint. Is it running, and does it allow this page's origin (CORS)?" : "") })); }
+    try { showReply(await PG.chat([{ role: "system", content: p.system }, { role: "user", content: p.user }])); }
+    catch (e) { answer.replaceChildren(h("div", { class: "pg-error", role: "alert", text: String(e.message || e) })); }
   }
+  var paste = h("textarea", { id: "kp-paste", spellcheck: "false", placeholder: "Or paste a model's reply here, for example: <answer>Yes</answer> <confidence>8</confidence>", "aria-label": "A model's reply" });
+  function copyPrompt() { var p = prompt(); (navigator.clipboard ? navigator.clipboard.writeText(p.system + "\n\n" + p.user) : Promise.reject()).then(function () { answer.replaceChildren(h("p", { class: "pg-line", text: "Prompt copied (system, then task). Paste it into any chat model, then paste its reply below." })); }, function () { answer.replaceChildren(h("p", { class: "pg-line", text: "Could not copy: select the prompt above and copy it." })); }); }
 
   root.className = "pg";
   var llm = h("div", { id: "kp-llm" });
@@ -77,7 +80,8 @@ var KP = (function () {
     h("div", { class: "pg-panel" }, h("h3", { text: "2. The prompt KROMA builds" }), h("p", { class: "pg-sub", text: "Terms that are short, contain digits, or contain underscores are dropped, as KROMA drops them. The system prompt comes first, then the task." }),
       h("p", { class: "pg-sub", text: "System" }), systemBox, h("p", { class: "pg-sub", text: "Task" }), userBox),
     h("div", { class: "pg-panel" }, h("h3", { text: "3. Ask a model" }), h("p", { class: "pg-sub", text: "Send the prompt to a model you run. KROMA reads the answer from an <answer> tag and the confidence from a <confidence> tag, and treats anything else as No." }),
-      h("div", { class: "pg-row" }, h("button", { type: "button", class: "btn solid", id: "kp-ask", onclick: ask }, "Ask my model")), answer),
+      h("div", { class: "pg-row" }, h("button", { type: "button", class: "btn solid", id: "kp-ask", onclick: ask }, "Ask my model"), h("button", { type: "button", class: "btn", id: "kp-copy", onclick: copyPrompt }, "Copy the prompt")),
+      h("div", { class: "pg-row" }, paste), h("div", { class: "pg-row" }, h("button", { type: "button", class: "btn", id: "kp-use", onclick: function () { showReply(paste.value); } }, "Read this reply")), answer),
     h("details", { class: "pg-panel" }, h("summary", { text: "Your model" }), llm));
 
   var [t, demo] = await Promise.all([fetch("playground-data.json").then(function (r) { return r.json(); }), fetch("demo-data.json").then(function (r) { return r.json(); })]);
