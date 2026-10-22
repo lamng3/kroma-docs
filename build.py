@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Write the KROMA API site."""
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -31,7 +32,76 @@ def nav_html(current):
     return "".join(links)
 
 
+HEADER = """<header class="site">
+  <a class="logo" href="index.html"><span class="logo-mark">K</span><span>KROMA</span></a>
+  <nav class="site">
+    <a href="pipeline.html">Pipeline</a>
+    <a href="query.html">Query</a>
+    <a href="cli.html">CLI</a>
+    <label class="nav-button" for="nav-toggle">Menu</label>
+    <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
+  </nav>
+</header>"""
+
+HEAD = """<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">"""
+
+HOME = """<section class="hero">
+  <div>
+    <h1>Ontology matching with knowledge retrieval and large language models</h1>
+    <p class="lede">LEDE</p>
+    <pre class="install"><span class="prompt">$ </span>git clone https://github.com/lamng3/kroma.git &amp;&amp; cd kroma
+<span class="prompt">$ </span>./setup.sh &amp;&amp; source .venv/bin/activate
+<span class="prompt">$ </span>kroma run --help</pre>
+    <div class="actions">
+      <a class="btn solid" href="pipeline.html">Matching run</a>
+      <a class="btn" href="cli.html">CLI</a>
+      <a class="btn" href="https://arxiv.org/abs/2507.14032">Paper</a>
+    </div>
+  </div>
+  <div class="demo-card" id="demo">
+    <div class="head"><h3>What KROMA asks the model</h3><span class="tag">real <b>prompts</b>, recorded <b>answers</b></span></div>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <pre class="prompt-box" id="prompt"></pre>
+    <div class="verdict-row" id="verdict"></div>
+    <p class="note">Mouse–Human anatomy pairs. The prompt is built by KROMA's own loader and <code>build_task_prompt</code> from the two ontologies. The answer is what the routed run in the <a href="https://lamng3.github.io/agentic-ontologist-docs/">Agentic Ontologist</a> recorded for the pair, and the tier that settled it: an evidence-only answer never reached a model. The page asks no model.</p>
+  </div>
+</section>
+<section class="block"><div class="prose-home">BODY</div></section>
+<script src="demo.js"></script>"""
+
+
+def home_page(title, description, lede, body):
+    body = re.sub(r'<nav class="toc">.*?</nav>', "", body, flags=re.S)
+    hero = HOME.replace("LEDE", lede).replace("BODY", body)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+{HEAD}
+<title>KROMA — ontology matching with knowledge retrieval and LLMs</title>
+<meta name="description" content="{description}">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
+{HEADER}
+<main class="wrap" id="content" style="max-width:1280px">
+{hero}
+</main>
+<footer class="site">{FOOTER}</footer>
+</body>
+</html>
+"""
+
+
 def page(filename, title, description, kicker, lede, body):
+    if filename == "index.html":
+        (ROOT / filename).write_text(home_page(title, description, lede, body), encoding="utf-8")
+        return
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
