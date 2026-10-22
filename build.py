@@ -19,13 +19,13 @@ NAV = [
 ]
 
 FOOTER = (
-    "KROMA API. Ontology matching with knowledge retrieval and large language models. "
+    "KROMA Manual. Ontology matching with knowledge retrieval and large language models. "
     'Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.'
 )
 
 
 def nav_html(current):
-    links = ['<a class="brand-desk" href="index.html">kroma</a>']
+    links = ['<a class="brand-desk" href="index.html">KROMA Manual</a>']
     for href, label in NAV:
         current_attr = ' aria-current="page"' if href == current else ""
         links.append(f'<a href="{href}"{current_attr}>{label}</a>')
@@ -109,7 +109,7 @@ def page(filename, title, description, kicker, lede, body):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — kroma</title>
+<title>{title} — KROMA Manual</title>
 <meta name="description" content="{description}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
