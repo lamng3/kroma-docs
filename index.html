@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Overview — kroma</title>
-<meta name="description" content="The KROMA Python API: the command line, the matching run, retrieval, models, and refinement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<title>KROMA — ontology matching with knowledge retrieval and LLMs</title>
+<meta name="description" content="The KROMA Python API: the command line, the matching run, retrieval, models, and refinement.">
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
+<input id="nav-toggle" class="nav-toggle" type="checkbox">
 <header class="site">
   <a class="logo" href="index.html"><span class="logo-mark">K</span><span>KROMA</span></a>
   <nav class="site">
@@ -22,17 +23,30 @@
     <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
   </nav>
 </header>
-<input id="nav-toggle" class="nav-toggle" type="checkbox">
-<div class="layout">
-<nav class="nav">
-<a class="brand-desk" href="index.html">kroma</a><a href="index.html" aria-current="page">Overview</a><a href="cli.html">CLI</a><a href="pipeline.html">Matching run</a><a href="loaders.html">Loaders</a><a href="query.html">Query</a><a href="models.html">Models</a><a href="retrieval.html">Retrieval</a><a href="refinement.html">Refinement</a><a href="metrics.html">Metrics</a>
-</nav>
-<main id="content">
-<p class="kicker">API</p>
-<h1>Overview</h1>
-<p class="lede">KROMA matches concepts across two ontologies. These pages are the Python API: what you call, and what it returns.</p>
+<main class="wrap" id="content" style="max-width:1280px">
+<section class="hero">
+  <div>
+    <h1>Ontology matching with knowledge retrieval and large language models</h1>
+    <p class="lede">KROMA matches concepts across two ontologies. These pages are the Python API: what you call, and what it returns.</p>
+    <pre class="install"><span class="prompt">$ </span>git clone https://github.com/lamng3/kroma.git &amp;&amp; cd kroma
+<span class="prompt">$ </span>./setup.sh &amp;&amp; source .venv/bin/activate
+<span class="prompt">$ </span>kroma run --help</pre>
+    <div class="actions">
+      <a class="btn solid" href="pipeline.html">Matching run</a>
+      <a class="btn" href="cli.html">CLI</a>
+      <a class="btn" href="https://arxiv.org/abs/2507.14032">Paper</a>
+    </div>
+  </div>
+  <div class="demo-card" id="demo">
+    <div class="head"><h3>What KROMA asks the model</h3><span class="tag">real <b>prompts</b>, recorded <b>answers</b></span></div>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <pre class="prompt-box" id="prompt"></pre>
+    <div class="verdict-row" id="verdict"></div>
+    <p class="note">Mouse–Human anatomy pairs. The prompt is built by KROMA's own loader and <code>build_task_prompt</code> from the two ontologies. The answer is what the routed run in the <a href="https://lamng3.github.io/agentic-ontologist-docs/">Agentic Ontologist</a> recorded for the pair, and the tier that settled it: an evidence-only answer never reached a model. The page asks no model.</p>
+  </div>
+</section>
+<section class="block"><div class="prose-home">
 
-<nav class="toc"><strong>On this page</strong><ol><li><a href="#the-pieces">The pieces</a></li><li><a href="#one-run">One run</a></li><li><a href="#install">Install</a></li></ol></nav>
 <p>A run loads an alignment, retrieves local context for each concept, asks a language model whether the pair matches, and refines the joined graph. The command line is the usual entry. The same steps are available as functions.</p>
 <h2 id="the-pieces">The pieces</h2>
 <div class="cards">
@@ -59,9 +73,9 @@ cd kroma
 source .venv/bin/activate
 uv pip install ".[models]"</code></pre>
 <p>Copy <code>.env.example</code> to <code>.env</code> and set <code>TOGETHERAI_API_KEY</code> or <code>OPENAI_API_KEY</code>. The paper is <a href="https://arxiv.org/abs/2507.14032">ISWC 2025</a>.</p>
-
+</div></section>
+<script src="demo.js"></script>
 </main>
-</div>
 <footer class="site">KROMA API. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
 </body>
 </html>
