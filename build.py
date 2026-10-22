@@ -16,6 +16,7 @@ NAV = [
     ("retrieval.html", "Retrieval"),
     ("refinement.html", "Refinement"),
     ("metrics.html", "Metrics"),
+    ("leaderboard.html", "Leaderboard"),
 ]
 
 FOOTER = (
@@ -149,6 +150,24 @@ def page(filename, title, description, kicker, lede, body):
 
 
 def main():
+    page(
+        "leaderboard.html",
+        "Leaderboard",
+        "KROMA against the best published baseline on six ontology matching tracks, with its ablations and other language models.",
+        "Results",
+        "KROMA's F1 on six tracks, ranked against the best published baseline, its own ablations, and smaller or cheaper models.",
+        """
+<p>KROMA has the highest F1 on all six tracks in the paper. The board also shows what each part of it contributes: removing knowledge retrieval or ontology refinement lowers F1 on every track reported, and with a small model it still beats the best baseline on some tracks.</p>
+<div data-arena data-src="leaderboard-data.json"></div>
+<script src="arena.js"></script>
+<h2 id="how-to-read-it">How to read it</h2>
+<ul>
+<li><strong>F1 (%)</strong> is the alignment's F1 against the reference matches, as published (Table 3 of the paper).</li>
+<li><strong>KROMA</strong> rows use Llama-3.3-70B unless a tag says otherwise. <strong>Ablation</strong> rows remove retrieval or refinement. <strong>Baseline</strong> is the best of MILA, OLaLa, and LLM4OM on that track, with their reported models.</li>
+<li>These are published numbers, not a run of this site. The <a href="https://lamng3.com/publications/kroma/">paper</a> has the protocol.</li>
+</ul>
+""",
+    )
     page(
         "index.html",
         "Overview",
