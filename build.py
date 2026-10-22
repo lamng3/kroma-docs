@@ -212,7 +212,7 @@ uv pip install ".[models]"</code></pre>
         "Try it",
         "Describe two concepts, see the exact prompt KROMA builds for them, and ask a model you run whether they are the same.",
         """
-<aside class="callout warning"><span class="label">What runs where</span><p>Everything runs in your browser. KROMA itself is Python and is not run here: the page builds the prompt with a port of KROMA's prompt builder (its templates are exported from the Python, so the text is identical), and reads the model's answer the way KROMA does. No model is hosted for this page, so <strong>Ask my model</strong> needs one you run yourself, for example Ollama on your computer.</p></aside>
+<aside class="callout warning"><span class="label">What runs where</span><p>Everything runs in your browser. KROMA itself is Python and is not run here: the page builds the prompt with a port of KROMA's prompt builder (its templates are exported from the Python, so the text is identical), and reads the model's answer the way KROMA does. No model is hosted for this page, so <strong>Ask my model</strong> uses a model you run: <strong>Ollama</strong> on this computer is detected automatically, or you can load a tiny model that runs in your browser on WebGPU (a few hundred megabytes, kept by your browser), or point it at another endpoint.</p></aside>
 <div id="kplay" aria-label="KROMA playground">Loading the playground…</div>
 <script src="pg.js"></script>
 <script src="playground.js"></script>

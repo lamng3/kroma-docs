@@ -64,7 +64,7 @@ var KP = (function () {
       h("pre", { class: "pg-pre", text: reply.trim() }));
   }
   async function ask() {
-    var p = prompt(); answer.replaceChildren(h("p", { class: "pg-line", text: "Asking " + PG.llmConfig().model + "…" }));
+    var p = prompt(); answer.replaceChildren(h("p", { class: "pg-line", text: "Asking " + PG.llmName() + "…" }));
     try { showReply(await PG.chat([{ role: "system", content: p.system }, { role: "user", content: p.user }])); }
     catch (e) { answer.replaceChildren(h("div", { class: "pg-error", role: "alert", text: String(e.message || e) })); }
   }
