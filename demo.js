@@ -4,15 +4,13 @@
   var root = document.getElementById("demo");
   if (!root) return;
   var el = function (id) { return document.getElementById(id); };
-  var TIER = { evidence: "settled by evidence, no model asked", local: "settled by the local model", api: "settled by the API model" };
 
   function pick(data, i) {
     var p = data.pairs[i];
     Array.prototype.forEach.call(el("tabs").children, function (b, j) { b.setAttribute("aria-selected", j === i ? "true" : "false"); });
     el("prompt").textContent = p.prompt.replace(/Task definition:[\s\S]*?Consider the following:\n\n/, "");
     var v = el("verdict");
-    v.innerHTML = '<span class="pill-tier"></span><span>answer <b></b> at confidence <b></b></span><span class="res"></span>';
-    v.children[0].textContent = TIER[p.tier] || p.tier;
+    v.innerHTML = '<span>answer <b></b> at confidence <b></b></span><span class="res"></span>';
     var b = v.querySelectorAll("b");
     b[0].textContent = p.answer; b[1].textContent = p.confidence.toFixed(2);
     var r = v.querySelector(".res");

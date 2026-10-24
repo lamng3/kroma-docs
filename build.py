@@ -72,7 +72,7 @@ HOME = """<section class="hero">
     <div class="tabs" id="tabs" role="tablist"></div>
     <pre class="prompt-box" id="prompt"></pre>
     <div class="verdict-row" id="verdict"></div>
-    <p class="note">Mouse–Human anatomy pairs. The prompt is built by KROMA's own loader and <code>build_task_prompt</code> from the two ontologies. The answer is what the routed run in the <a href="https://lamng3.com/agentic-ontologist/">Agentic Ontologist</a> recorded for the pair, and the tier that settled it: an evidence-only answer never reached a model. The page asks no model.</p>
+    <p class="note">Mouse–Human anatomy pairs. The prompt is built by KROMA's own loader and <code>build_task_prompt</code> from the two ontologies. The answer is what a recorded run gave for the pair. The page asks no model.</p>
   </div>
 </section>
 <section class="block"><div class="prose-home">BODY</div></section>
@@ -219,7 +219,7 @@ uv pip install ".[models]"</code></pre>
 <h2 id="what-it-shows">What it shows</h2>
 <ul>
 <li>The <strong>prompt</strong> is the whole of what KROMA sends to decide one pair: both concepts' names, parents, children, and synonyms. Change a field and the prompt changes with it, so you can see how much a missing parent or a synonym can matter.</li>
-<li>The <strong>recorded answer</strong> for the example pairs is what the routed run of the <a href="https://lamng3.com/agentic-ontologist/">Agentic Ontologist</a> recorded, and which tier settled it.</li>
+<li>The <strong>recorded answer</strong> for the example pairs is what a recorded run gave, checked against the reference.</li>
 <li>Retrieval, voting across several agents, and refinement are not run here. See <a href="retrieval.html">Retrieval</a> and <a href="refinement.html">Refinement</a>.</li>
 </ul>
 """,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export what the KROMA playground needs from the real code.
 
-    ../agentic-ontologist/.venv/bin/python playground_data.py
+    ../kroma/.venv/bin/python playground_data.py
 
 The prompt templates of kroma.tasks.prompts (so the page builds prompts from the same text), and fixtures that pin the
 page's JavaScript ports of answer extraction and voting to kroma.agents.utils. The page's tests compare them.
