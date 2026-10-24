@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Export real prompts for the manual's live demo.
 
-    ../kroma/.venv/bin/python demo_data.py
+    RECORDED_RUN=/path/to/run_dir ../kroma/.venv/bin/python demo_data.py
 
-For a sample of Mouse-Human pairs from the recorded run (agentic-ontologist, 2026-10-18) this finds the two classes in
+For a sample of Mouse-Human pairs from a recorded run (the directory in RECORDED_RUN) this finds the two classes in
 the ontologies, reads their parents and children with kroma's own loader, builds the prompt with kroma's
 `build_task_prompt`, and keeps the answer the run recorded. The page shows the prompt and the answer; nothing is
 asked of a model in the browser.
 """
 
 import json
+import os
 import random
 import sys
 from collections import defaultdict
@@ -17,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 KROMA = ROOT.parent / "kroma"
-AO = ROOT.parent / "agentic-ontologist"
+AO = Path(os.environ.get("RECORDED_RUN", ROOT))
 DATA = AO / "data" / "MouseHuman"
 sys.path.insert(0, str(KROMA / "src"))
 sys.path.insert(0, str(AO / "showcase"))
@@ -59,9 +60,9 @@ def context(uri, by_uri, parents, children):
 
 
 def main():
-    import build  # the showcase's page data, so the decisions match
+    import build  # the run's page data, so the decisions match
 
-    run = json.loads((AO / "results/agentic_workflow/2026-10-18.json").read_text())
+    run = json.loads((AO / "run.json").read_text())
     decisions = [d for d in build.page_data(run)["decisions"] if d["agent"] == "kroma"]
     mp, mc = hierarchy(DATA / "mouse.owl")
     hp, hc = hierarchy(DATA / "human.owl")
@@ -70,11 +71,11 @@ def main():
     pool = [d for d in decisions if d["s"].lower() in mouse_label and d["c"].lower() in human_label]
     rng = random.Random(1)
     picks = []
-    for tier in ("evidence", "local", "api"):
+    for group_key in sorted({d["tier"] for d in pool}):
         for ok in (True, False):
-            group = [d for d in pool if d["tier"] == tier and d["ok"] == ok and d["verb"]]
+            group = [d for d in pool if d["tier"] == group_key and d["ok"] == ok and d["verb"]]
             picks += rng.sample(group, min(2 if ok else 1, len(group)))
-    out = {"source": "agentic-ontologist results/agentic_workflow/2026-10-18.json", "pairs": []}
+    out = {"source": "recorded run, 2026-10-18", "pairs": []}
     for d in picks:
         su, tu = mouse_label[d["s"].lower()], human_label[d["c"].lower()]
         source = context(su, mouse_by_uri, mp, mc)
@@ -87,7 +88,6 @@ def main():
                 "context": {"source": list(source), "target": list(target)},
                 "system": system.strip(),
                 "prompt": user.strip(),
-                "tier": d["tier"],
                 "answer": d["ans"],
                 "confidence": d["conf"],
                 "correct": d["ok"],

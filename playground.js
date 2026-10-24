@@ -54,8 +54,7 @@ var KP = (function () {
     answer.replaceChildren();
     if (i < 0) { fillSide("source", ["", [], [], []]); fillSide("target", ["", [], [], []]); recordedBox.textContent = ""; update(); return; }
     var p = pairs[i]; fillSide("source", p.context.source); fillSide("target", p.context.target);
-    var tier = { evidence: "settled by evidence, no model asked", local: "settled by the local model", api: "settled by the API model" }[p.tier] || p.tier;
-    recordedBox.textContent = "The recorded run answered " + p.answer + " at confidence " + p.confidence.toFixed(2) + " (" + tier + "), and the reference " + (p.correct ? "agrees." : "disagrees.");
+    recordedBox.textContent = "The recorded run answered " + p.answer + " at confidence " + p.confidence.toFixed(2) + ", and the reference " + (p.correct ? "agrees." : "disagrees.");
     update();
   }
   function showReply(reply) {
