@@ -22,7 +22,7 @@ NAV = [
 
 FOOTER = (
     "KROMA Manual. Ontology matching with knowledge retrieval and large language models. "
-    'Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.'
+    'Code: <a href="https://github.com/cwru-sdle/kroma">github.com/cwru-sdle/kroma</a>.'
 )
 
 
@@ -41,7 +41,7 @@ HEADER = """<header class="site">
     <a href="playground.html">Playground</a>
     <a href="cli.html">CLI</a>
     <label class="nav-button" for="nav-toggle">Menu</label>
-    <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
+    <a href="https://github.com/cwru-sdle/kroma" class="pill">GitHub ↗</a>
   </nav>
 </header>"""
 
@@ -57,7 +57,7 @@ HOME = """<section class="hero">
   <div>
     <h1>Ontology matching with knowledge retrieval and large language models</h1>
     <p class="lede">LEDE</p>
-    <pre class="install"><span class="prompt">$ </span>git clone https://github.com/lamng3/kroma.git &amp;&amp; cd kroma
+    <pre class="install"><span class="prompt">$ </span>git clone https://github.com/cwru-sdle/kroma.git &amp;&amp; cd kroma
 <span class="prompt">$ </span>./setup.sh &amp;&amp; source .venv/bin/activate
 <span class="prompt">$ </span>kroma run --help</pre>
     <div class="actions">
@@ -128,7 +128,7 @@ def page(filename, title, description, kicker, lede, body):
     <a href="playground.html">Playground</a>
     <a href="cli.html">CLI</a>
     <label class="nav-button" for="nav-toggle">Menu</label>
-    <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
+    <a href="https://github.com/cwru-sdle/kroma" class="pill">GitHub ↗</a>
   </nav>
 </header>
 <input id="nav-toggle" class="nav-toggle" type="checkbox">
@@ -197,7 +197,7 @@ def main():
 <li><code>finish</code> runs <code>offline_refine</code> and writes a metrics JSON file.</li>
 </ol>
 <h2 id="install">Install</h2>
-<pre><code>git clone https://github.com/lamng3/kroma.git
+<pre><code>git clone https://github.com/cwru-sdle/kroma.git
 cd kroma
 ./setup.sh
 source .venv/bin/activate
@@ -238,7 +238,7 @@ uv pip install ".[models]"</code></pre>
   --llm meta-llama/Llama-3.3-70B-Instruct-Turbo-Free \\
   --baseline</code></pre>
 <p><code>--method_config</code> is the JSONL file name under <code>experiments/configs/method/&lt;llm&gt;/</code>. <code>--llm</code> is that directory name. Both are required.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/cli.py">cli.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/cli.py">cli.py</a>.</p>
 <h2 id="flags">Flags</h2>
 <table>
 <tr><th>Flag</th><th>Meaning</th></tr>
@@ -269,7 +269,7 @@ uv pip install ".[models]"</code></pre>
 <pre><code>MatchingRun(args, listener=None)
 MatchingRun.execute() -&gt; dict</code></pre>
 <p><code>execute</code> calls <code>prepare</code>, <code>score_pairs</code>, and <code>finish</code>. <code>listener</code> defaults to <code>MetricsListener</code>, which counts tokens and refinement time.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/pipeline.py">pipeline.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/pipeline.py">pipeline.py</a>.</p>
 <h2 id="methods">Methods</h2>
 <table>
 <tr><th>Method</th><th>What it does</th></tr>
@@ -293,7 +293,7 @@ MatchingRun.execute() -&gt; dict</code></pre>
 <h2 id="base">OntologyLoader</h2>
 <pre><code>load() -&gt; (source_graph, target_graph, alignments)</code></pre>
 <p>An alignment is <code>(source, target, label)</code>. Each endpoint is a <code>(label, uri)</code> pair.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/tasks/loader.py">loader.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/tasks/loader.py">loader.py</a>.</p>
 <h2 id="csv">CSV alignments</h2>
 <pre><code>CsvAlignmentLoader(csv_paths, dataset="ncit-doid").load()</code></pre>
 <p>For <code>ncit-doid</code>, rows use <code>src_code</code>, <code>src_ety</code>, <code>tgt_code</code>, <code>tgt_ety</code>, <code>tgt_cands</code>, and <code>score</code>. Other datasets use <code>source</code>, <code>source_uri</code>, <code>target</code>, <code>target_uri</code>, and <code>relation</code>.</p>
@@ -316,7 +316,7 @@ MatchingRun.execute() -&gt; dict</code></pre>
 
 register_query_strategy(name, strategy) -&gt; None</code></pre>
 <p>Unknown option names are skipped. A strategy that raises is skipped, and the other options still return.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/tasks/query_engine.py">query_engine.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/tasks/query_engine.py">query_engine.py</a>.</p>
 <h2 id="strategies">Strategies</h2>
 <table>
 <tr><th>Strategy</th><th>Option names</th></tr>
@@ -343,7 +343,7 @@ register_chat_backend(name, provider_cls) -&gt; None
 register_embedding_backend(name, provider_cls) -&gt; None</code></pre>
 <p>Chat backends are <code>openai</code> and <code>togetherai</code>. The API key is <code>OPENAI_API_KEY</code> or <code>TOGETHERAI_API_KEY</code>. Embedding backends are <code>huggingface</code> and <code>sentence-transformers</code>.</p>
 <p><code>BaseModel.generate</code> retries transient connection, timeout, and rate-limit errors.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/inference/factory.py">factory.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/inference/factory.py">factory.py</a>.</p>
 <h2 id="inference">Inference</h2>
 <pre><code>infer(debate, backend, model_name, source_term, target_term, ...)
   -&gt; prediction, metrics, confidence, accept</code></pre>
@@ -353,7 +353,7 @@ register_embedding_backend(name, provider_cls) -&gt; None</code></pre>
 <tr><td><code>DebateInference</code></td><td>One agent per config, for <code>n_rounds</code> rounds.</td></tr>
 </table>
 <p><code>expand_term</code> calls <code>query</code> and returns the concept code plus parents, children, synonyms, and labels.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/agents/inference.py">inference.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/agents/inference.py">inference.py</a>.</p>
 """,
     )
     page(
@@ -368,14 +368,14 @@ register_embedding_backend(name, provider_cls) -&gt; None</code></pre>
 <pre><code>VectorStore.add(ext_ids, embeddings) -&gt; None
 VectorStore.query(query_emb, top_k=5) -&gt; list[(id, score)]</code></pre>
 <p><code>add</code> stacks embedding rows and keeps the external ids in the same order. <code>query</code> L2-normalizes the stored matrix and the query, then returns the top cosine scores. An empty store returns an empty list.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/retrieval/vector_store.py">vector_store.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/retrieval/vector_store.py">vector_store.py</a>.</p>
 <h2 id="embeddings">Combined embeddings</h2>
 <pre><code>compute_combined_embeddings(
     adj_dict, node_keys, text_embs,
     n2v_kwargs=None, combine_method="concat", alpha=0.5,
 )</code></pre>
 <p>The default combine method is concatenation of the text embedding and the Node2Vec embedding. <code>alpha</code> applies when the method is a weighted mix rather than concatenation.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/algorithms/node2vec.py">node2vec.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/algorithms/node2vec.py">node2vec.py</a>.</p>
 """,
     )
     page(
@@ -394,7 +394,7 @@ VectorStore.query(query_emb, top_k=5) -&gt; list[(id, score)]</code></pre>
 <pre><code>offline_refine(adj, rank_attr) -&gt; dict</code></pre>
 <p><code>compute_node_ranks</code> assigns each node its longest distance from a root. <code>offline_refine</code> partitions nodes by that rank, splits blocks that a higher node separates, and collapses each block.</p>
 <p><code>MatchingRun.finish</code> calls this once after scoring.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/algorithms/refinement.py">refinement.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/algorithms/refinement.py">refinement.py</a>.</p>
 """,
     )
     page(
@@ -409,7 +409,7 @@ VectorStore.query(query_emb, top_k=5) -&gt; list[(id, score)]</code></pre>
 <pre><code>calculate_metrics(y_true, y_pred, positive_label=1)
   -&gt; (precision, recall, f1)</code></pre>
 <p><code>y_true</code> and <code>y_pred</code> are sequences of labels, zipped in order. <code>positive_label</code> defaults to <code>1</code>.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/metrics/scoring.py">scoring.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/metrics/scoring.py">scoring.py</a>.</p>
 <h2 id="empty">Empty input</h2>
 <p>Precision is 0 when there are no positive predictions. Recall is 0 when there are no positive labels. F1 is 0 when precision and recall are both 0. The function does not raise on an empty pair of lists.</p>
 """,

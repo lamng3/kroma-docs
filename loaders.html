@@ -20,7 +20,7 @@
     <a href="playground.html">Playground</a>
     <a href="cli.html">CLI</a>
     <label class="nav-button" for="nav-toggle">Menu</label>
-    <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
+    <a href="https://github.com/cwru-sdle/kroma" class="pill">GitHub ↗</a>
   </nav>
 </header>
 <input id="nav-toggle" class="nav-toggle" type="checkbox">
@@ -37,7 +37,7 @@
 <h2 id="base">OntologyLoader</h2>
 <pre><code>load() -&gt; (source_graph, target_graph, alignments)</code></pre>
 <p>An alignment is <code>(source, target, label)</code>. Each endpoint is a <code>(label, uri)</code> pair.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/tasks/loader.py">loader.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/tasks/loader.py">loader.py</a>.</p>
 <h2 id="csv">CSV alignments</h2>
 <pre><code>CsvAlignmentLoader(csv_paths, dataset="ncit-doid").load()</code></pre>
 <p>For <code>ncit-doid</code>, rows use <code>src_code</code>, <code>src_ety</code>, <code>tgt_code</code>, <code>tgt_ety</code>, <code>tgt_cands</code>, and <code>score</code>. Other datasets use <code>source</code>, <code>source_uri</code>, <code>target</code>, <code>target_uri</code>, and <code>relation</code>.</p>
@@ -48,7 +48,7 @@
 <nav class="pager" aria-label="Pages"><a class="prev" href="pipeline.html"><span>Previous</span>Matching run</a><a class="next" href="query.html"><span>Next</span>Query</a></nav>
 </main>
 </div>
-<footer class="site">KROMA Manual. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+<footer class="site">KROMA Manual. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/cwru-sdle/kroma">github.com/cwru-sdle/kroma</a>.</footer>
 <script src="search.js"></script>
 </body>
 </html>

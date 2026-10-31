@@ -20,7 +20,7 @@
     <a href="playground.html">Playground</a>
     <a href="cli.html">CLI</a>
     <label class="nav-button" for="nav-toggle">Menu</label>
-    <a href="https://github.com/lamng3/kroma" class="pill">GitHub ↗</a>
+    <a href="https://github.com/cwru-sdle/kroma" class="pill">GitHub ↗</a>
   </nav>
 </header>
 <input id="nav-toggle" class="nav-toggle" type="checkbox">
@@ -41,7 +41,7 @@ register_chat_backend(name, provider_cls) -&gt; None
 register_embedding_backend(name, provider_cls) -&gt; None</code></pre>
 <p>Chat backends are <code>openai</code> and <code>togetherai</code>. The API key is <code>OPENAI_API_KEY</code> or <code>TOGETHERAI_API_KEY</code>. Embedding backends are <code>huggingface</code> and <code>sentence-transformers</code>.</p>
 <p><code>BaseModel.generate</code> retries transient connection, timeout, and rate-limit errors.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/inference/factory.py">factory.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/inference/factory.py">factory.py</a>.</p>
 <h2 id="inference">Inference</h2>
 <pre><code>infer(debate, backend, model_name, source_term, target_term, ...)
   -&gt; prediction, metrics, confidence, accept</code></pre>
@@ -50,12 +50,12 @@ register_embedding_backend(name, provider_cls) -&gt; None</code></pre>
 <tr><td><code>DebateInference</code></td><td>One agent per config, for <code>n_rounds</code> rounds.</td></tr>
 </tbody></table>
 <p><code>expand_term</code> calls <code>query</code> and returns the concept code plus parents, children, synonyms, and labels.</p>
-<p>Source: <a href="https://github.com/lamng3/kroma/blob/main/src/kroma/agents/inference.py">inference.py</a>.</p>
+<p>Source: <a href="https://github.com/cwru-sdle/kroma/blob/main/src/kroma/agents/inference.py">inference.py</a>.</p>
 
 <nav class="pager" aria-label="Pages"><a class="prev" href="query.html"><span>Previous</span>Query</a><a class="next" href="retrieval.html"><span>Next</span>Retrieval</a></nav>
 </main>
 </div>
-<footer class="site">KROMA Manual. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/lamng3/kroma">github.com/lamng3/kroma</a>.</footer>
+<footer class="site">KROMA Manual. Ontology matching with knowledge retrieval and large language models. Code: <a href="https://github.com/cwru-sdle/kroma">github.com/cwru-sdle/kroma</a>.</footer>
 <script src="search.js"></script>
 </body>
 </html>
